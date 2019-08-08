@@ -43,6 +43,7 @@ class FileParserTest {
     public void generateJsonTest(){
         JsonArray jsonArray = fileParser.getResponsesAsJson(); // it parses without error
         JsonElement object = jsonArray.get(0);
+        assert object.getAsJsonObject().get("totalSentimentScore").getAsInt() == 1;
         assert object.getAsJsonObject().get("sentimentResult").isJsonObject();
         assert object.getAsJsonObject().get("entitiesResult").isJsonObject();
     }

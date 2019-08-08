@@ -24,15 +24,15 @@ class MessageParserTest {
     @Test
     public void parseMessageTestPositive(){
         Response response = positiveResponse;
-        DetectSentimentResult sentimentResult = response.getSentimentResult();
-        assert sentimentResult.getSentiment().equals("POSITIVE");
+        int score = response.getSentimentScore();
+        assert score == 1;
     }
 
     @Test
     public void parseMessageTestNegative(){
         Response response = negativeResponse;
-        DetectSentimentResult sentimentResult = response.getSentimentResult();
-        assert sentimentResult.getSentiment().equals("NEGATIVE");
+        int score = response.getSentimentScore();
+        assert score == -1;
     }
 
     @Test

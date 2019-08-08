@@ -15,6 +15,7 @@ public class Response {
     protected String subject;
     protected long createdAt;
     protected int favouriteCount;
+    protected int totalSentimentScore;
 
     public Response(String message, String languageCode){
         this.message = message;
@@ -33,10 +34,20 @@ public class Response {
         this.languageCode = languageCode;
         this.createdAt = createdAt;
         this.favouriteCount = favouriteCount;
+        this.totalSentimentScore = 0;
     }
 
     public void setSentimentResult(DetectSentimentResult sentimentResult) {
         this.sentimentResult = sentimentResult;
+        if (sentimentResult.getSentiment().equals("POSITIVE")){
+            this.totalSentimentScore = 1;
+        } else if (sentimentResult.getSentiment().equals("NEGATIVE")){
+            this.totalSentimentScore = -1;
+        }
+    }
+
+    public int getSentimentScore(){
+        return this.totalSentimentScore;
     }
 
     public void setEntitiesResult(DetectEntitiesResult entitiesResult){

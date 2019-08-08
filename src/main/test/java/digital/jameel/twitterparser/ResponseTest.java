@@ -14,12 +14,14 @@ public class ResponseTest {
     @BeforeAll
     public static void setup(){
         MessageParser parser = new MessageParser(region, languageCode);
-        response = parser.parseMessage("I am really happy to see the new Spiderman movie with Tom Holland, but I really hated the soundtrack");
+        response = parser.parseMessage("Absolutely hated the movie! Would never watch it again");
     }
 
     @Test
     public void responseGenerateJsonIsValid(){
         JsonObject json = response.generateJson();
-        json.getAsJsonObject("sentimentResult").get("sentiment").getAsString().equals("MIXED");
+        assert json.getAsJsonObject("sentimentResult").get("sentiment").getAsString().equals("NEGATIVE");
+        assert json.get("totalSentimentScore").getAsInt() == -1;
     }
+
 }
